@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
+from .model import ContactsModel
+
 class Window(QMainWindow):
     """Main Window"""
     def __init__(self, parent=None):
@@ -19,11 +21,13 @@ class Window(QMainWindow):
         self.setCentralWidget(self.centralWidget)
         self.layout = QHBoxLayout()
         self.centralWidget.setLayout(self.layout)
+        self.contactsModel = ContactsModel()
         self.setupUI()
 
     def setupUI(self):
         #Create table view widget
         self.table = QTableView()
+        self.table.setModel(self.contactsModel.model)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table.resizeColumnsToContents()
 
@@ -40,4 +44,4 @@ class Window(QMainWindow):
         layout.addWidget(self.clearAllButton)
         self.layout.addWidget(self.table)
         self.layout.addLayout(layout)
-        
+
