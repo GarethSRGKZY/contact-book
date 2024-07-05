@@ -10,7 +10,7 @@ def _createContactsTable():
             id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
             name VARCHAR(40) NOT NULL,
             job VARCHAR(50),
-            email VARCHAR(40) NOT NULL,
+            email VARCHAR(40) NOT NULL
         )
         """
     )
