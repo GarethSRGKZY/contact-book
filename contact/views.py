@@ -104,16 +104,19 @@ class AddDialog(QDialog):
     def setupUI(self):
         """Setup GUI for Add Contact dialog"""
         # Create line edits for data fields
-        self.nameField = QLineEdit()  # Corrected the variable name
+        self.nameField = QLineEdit()  
         self.nameField.setObjectName("Name")
-        self.jobField = QLineEdit()  # Corrected the variable name
+        self.jobField = QLineEdit()  
         self.jobField.setObjectName("Job")
-        self.emailField = QLineEdit()  # Corrected the variable name
+        self.phoneField = QLineEdit()  
+        self.phoneField.setObjectName("Phone No.")
+        self.emailField = QLineEdit()  
         self.emailField.setObjectName("Email")
         # Layout data fields
         layout = QFormLayout()
         layout.addRow("Name", self.nameField)
         layout.addRow("Job", self.jobField)
+        layout.addRow("Phone No.", self.phoneField)
         layout.addRow("Email", self.emailField)
         self.layout.addLayout(layout)
         # Add standard buttons to the dialog and connect
@@ -127,7 +130,7 @@ class AddDialog(QDialog):
     def accept(self):
         """Accepts the data provided through the dialog"""
         self.data = []
-        for field in (self.nameField, self.jobField, self.emailField):  # Corrected the variable names
+        for field in (self.nameField, self.jobField, self.phoneField, self.emailField):  # Corrected the variable names
             if not field.text():
                 QMessageBox.critical(
                     self,
