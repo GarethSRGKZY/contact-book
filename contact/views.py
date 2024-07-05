@@ -37,6 +37,12 @@ class Window(QMainWindow):
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table.resizeColumnsToContents()
 
+        # Create search bar and button
+        self.searchBar = QLineEdit()
+        self.searchBar.setPlaceholderText("Search contacts")
+        self.searchButton = QPushButton("Search")
+        self.searchButton.clicked.connect(self.searchContacts)
+
         # Create buttons
         self.addButton = QPushButton("Add Contact")
         self.addButton.clicked.connect(self.openAddDialog)
@@ -46,13 +52,27 @@ class Window(QMainWindow):
         self.clearAllButton.clicked.connect(self.clearContacts)
 
         # GUI Layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.addButton)
-        layout.addWidget(self.deleteButton)
-        layout.addStretch()
-        layout.addWidget(self.clearAllButton)
-        self.layout.addWidget(self.table)
-        self.layout.addLayout(layout)
+        searchLayout = QHBoxLayout()
+        searchLayout.addWidget(self.searchBar)
+        searchLayout.addWidget(self.searchButton)
+
+        buttonsLayout = QVBoxLayout()
+        buttonsLayout.addWidget(self.addButton)
+        buttonsLayout.addWidget(self.deleteButton)
+        buttonsLayout.addStretch()
+        buttonsLayout.addWidget(self.clearAllButton)
+
+        mainLayout = QVBoxLayout()
+        mainLayout.addLayout(searchLayout)
+        mainLayout.addWidget(self.table)
+        mainLayout.addLayout(buttonsLayout)
+        
+        self.layout.addLayout(mainLayout)
+    
+    def searchContacts(self):
+        """Search contacts in the database"""
+        searchText = self.searchBar.text()
+        self.contactsModel.searchContacts(searchText)
     
     def openAddDialog(self):
         """Open Add Contact Dialog"""

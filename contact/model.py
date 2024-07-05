@@ -39,3 +39,14 @@ class ContactsModel:
         self.model.submitAll()
         self.model.setEditStrategy(QSqlTableModel.OnFieldChange)
         self.model.select()
+
+    def searchContacts(self, searchText):
+        """Search for contacts that match the given search text"""
+        filterString = (
+            f"name LIKE '%{searchText}%' OR "
+            f"job LIKE '%{searchText}%' OR "
+            f"phone LIKE '%{searchText}%' OR "
+            f"email LIKE '%{searchText}%'"
+        )
+        self.model.setFilter(filterString)
+        self.model.select()
