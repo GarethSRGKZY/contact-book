@@ -43,6 +43,7 @@ class Window(QMainWindow):
         self.deleteButton = QPushButton("Delete Contact")
         self.deleteButton.clicked.connect(self.deleteContact)
         self.clearAllButton = QPushButton("Clear All")
+        self.clearAllButton.clicked.connect(self.clearContacts)
 
         # GUI Layout
         layout = QVBoxLayout()
@@ -75,6 +76,18 @@ class Window(QMainWindow):
 
         if messageBox == QMessageBox.Yes:
             self.contactsModel.deleteContact(row)
+    
+    def clearContacts(self):
+        """Clear all contacts from database"""
+        messageBox = QMessageBox.warning(
+            self,
+            "Warning!",
+            "Do you want to remove all contacts?",
+            QMessageBox.Yes | QMessageBox.No,
+        )
+
+        if messageBox == QMessageBox.Yes:
+            self.contactsModel.clearContacts()
 
 class AddDialog(QDialog):
     """Add contact dialog"""
